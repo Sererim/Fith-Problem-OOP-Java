@@ -1,7 +1,5 @@
 package University_Java_5_OOP;
 
-import java.util.Iterator;
-
 public class Person {
     
     private String firstName = "";
