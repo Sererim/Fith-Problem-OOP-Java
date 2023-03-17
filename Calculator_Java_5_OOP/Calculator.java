@@ -7,8 +7,8 @@ public class Calculator {
     private double x;
     private double y;
 
-    private static ArrayList<String> log = new ArrayList<>();
-    private static String answer;
+    public static ArrayList<String> log = new ArrayList<>();
+    private static String answer = "";
 
     Calculator()
     {
@@ -38,31 +38,34 @@ public class Calculator {
         return new Calculator(this.x - this.y);
     }
 
-    public static add(Calculator z1, Calculator z2)
+    public static Calculator add(Calculator z1, Calculator z2)
     {
         double foo, bar;
         foo = z1.x + z2.x;
         bar = z1.y + z2.y;
         answer += z1.x + " + i" + z1.y + " + " + z2.x + " + i" + z2.y + " = " + foo + " + i" + bar;
+        return new Calculator(z1.x - z2.x , z1.y - z2.y);
     }
 
-    public static sub(Calculator z1, Calculator z2)
+    public static Calculator sub(Calculator z1, Calculator z2)
     {
         double foo, bar;
         foo = z1.x - z2.x;
         bar = z1.y - z2.y;
-        answer += z1.x + " + i" + z1.y + " + " + z2.x + " + i" + z2.y " = ";
+        answer += z1.x + " + i" + z1.y + " + " + z2.x + " + i" + z2.y + " = " + foo + " + i" + bar;
+        return new Calculator(z1.x - z2.x , z1.y - z2.y);
     }
 
-    public static mult(Calculator z1, Calculator z2)
+    public static Calculator mult(Calculator z1, Calculator z2)
     {
         double x = z1.x * z2.x - z1.y * z2.y;
         double y = z1.x * z2.y + z1.y * z2.x;
-        answer += "(" + z1.x + " + i" + z1.y + ")" + " * " + "(" + z2.x + " + i" + z2.y + ")" + " = " ;  
+        answer += "(" + z1.x + " + i" + z1.y + ")" + " * " + "(" + z2.x + " + i" + z2.y + ")" + " = " +  x + " + i" + y;
+        return new Calculator(x, y);  
     }
 
     public static Calculator div(Calculator z1, Calculator z2)
-    {
+    { 
         Calculator output = mult(z1,z2.conjugate());
         double div = (z2.mod()) * (z2.mod());
         return new Calculator(output.x/div,output.y/div);
@@ -71,13 +74,14 @@ public class Calculator {
     @Override
     public String toString()
     {
-        String re = this.x+"";
+        String re = this.x+" ";
         String im = "";
-        if(this.y < 0)
-            im = this.y+"i";
+        if(this.y == 0)
+            im = "";
         else
-            im = "+"+this.y+"i";
-        log.add(log.size() + 1 + " " + )
+            im = " + i"+this.y;
+        log.add(log.size() + 1 + " | " + answer);
+        answer = "";
         return re+im;
     }
 }
